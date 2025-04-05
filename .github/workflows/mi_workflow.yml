@@ -1,0 +1,32 @@
+name: CI/CD Pipeline  # 1. Dale un nombre descriptivo a tu workflow
+
+on:
+  push:  # 2. ¿Qué evento(s) quieres usar para disparar este workflow?
+    branches:
+      - main
+  pull_request:  # Segundo evento para disparar el workflow
+    branches:
+      - main
+  workflow_dispatch:  # Permite ejecución manual
+
+jobs:
+  imprimir_info:  # No cambies este nombre, lo usaremos para evaluar
+    runs-on: ubuntu-latest  # 3. ¿En qué sistema operativo quieres que se ejecute este job?
+
+    steps:
+      - uses: actions/checkout@v3  # Este paso clona tu repositorio. No lo modifiques.
+
+      - name: Imprimir Mensaje Personalizado
+        # 4. Reemplaza [TU NOMBRE COMPLETO] con tu nombre.
+        # 5. ¿Qué comando de shell usarías para obtener la fecha y hora?
+        run: |
+          echo "Hola, somos Juan Pablo Cortés y Juan Esteban Cardona y este es mi primer workflow!"  
+          echo "La fecha y hora actual es: $(date)"  
+
+      - name: Configurar Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11' # 6. Elige una versión de Python
+
+      - name: Ejecutar script Python
+        run: python main.py #7. Completa para ejecutar el script de python
